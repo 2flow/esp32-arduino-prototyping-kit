@@ -1,0 +1,49 @@
+{
+  "name": "ESP32 Prototyping Library",
+  "keywords": "LED",
+  "description": "Prototyping Library for the ESP32 to create fast simple prototypes.",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "authors": [
+    {
+      "name": "Florian Wimmer",
+      "email": "flo@wimmer.kiwi",
+      "maintainer": true
+    }
+  ],
+  "dependencies": [
+    {
+      "owner": "fhessel",
+      "name": "esp32_https_server",
+      "version": "^1.0.0"
+    },
+    {
+      "owner": "thomasfredericks",
+      "name": "Bounce2",
+      "version": "^2.57"
+    }
+  ],
+  "exports": {
+    "include": [
+      "include/*.h",
+      "src/*.cpp"
+    ],
+    "exclude": [
+      ".travis.yml",
+      ".gitignore",
+      "lib/*",
+      "test/*",
+      ".vscode/*",
+      "include/README",
+      "src/README",
+      "README.md",
+      "src/main.cpp",
+      "*main.cpp"
+    ]
+  },
+  "version": "0.0.1",
+  "frameworks": "*",
+  "platforms": "espressif32"
+}
