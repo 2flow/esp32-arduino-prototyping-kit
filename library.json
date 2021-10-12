@@ -4,7 +4,7 @@
   "description": "Prototyping Library for the ESP32 to create fast simple prototypes.",
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/2flow/esp32-arduino-prototyping-kit"
   },
   "authors": [
     {

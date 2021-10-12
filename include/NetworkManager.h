@@ -10,7 +10,7 @@
  */
 class NetworkManager {
 public:
-    static void start(const char *hostName, const char *ssid, const char *password, char *dnsName, bool waitForConnection = true);
+    static void start(const char *ssid, const char *password, char const *dnsName, bool waitForConnection = true);
     static bool isConnected();
     static bool addMDNSService(char const* service, char const* protocol, uint16_t port);
 private:

@@ -8,10 +8,10 @@
 #include "NetworkManager.h"
 bool NetworkManager::sWifiStarted = false;
 
-void NetworkManager::start(const char *hostName, const char *ssid, const char *password, char *dnsName, bool waitForConnection) {
+void NetworkManager::start(const char *ssid, const char *password, char const *dnsName, bool waitForConnection) {
     if (!sWifiStarted) {
         WiFi.config(INADDR_NONE, INADDR_NONE, INADDR_NONE, INADDR_NONE);
-        WiFi.setHostname(hostName);
+        WiFi.setHostname(dnsName);
         WiFiClass::mode(WIFI_STA);
         WiFi.begin(ssid, password);
 
