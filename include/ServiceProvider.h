@@ -1,57 +1,61 @@
 //
-// Created by f.wimmer on 08.10.2021.
-// Needs to go into a global package
-//
+// Created by f.wimmer on 11.10.2021.
+// TODO("Move to global prototyping lib")
 
 #ifndef ESP32PROROTYPINGLIB_SERVICEPROVIDER_H
 #define ESP32PROROTYPINGLIB_SERVICEPROVIDER_H
-#include "Arduino.h"
+
+#include "stdlib.h"
+
 template <typename TService>
 class ServiceProvider {
 public:
-    /**
-     * Return the service from the id, if the id is not given the first service will be returned
-     * @param id For future use if there are multiple services of the same type
-     * @return
-     */
-    static TService* getService(size_t id = 0);
-    static TService* getServiceMaybe(size_t id = 0);
-    static bool isServiceAvailable();
+    virtual TService* getService(char const *serviceName) const = 0;
+    virtual TService* getService() const = 0;
 
-    static void setService(TService* service);
+    virtual void setService(char const *serviceName, TService* service)  = 0;
+    virtual void setService(TService*  service) = 0;
+
+    static void setServiceProvider(ServiceProvider<TService>* serviceProvider);
+    static ServiceProvider<TService>* getServiceProvider();
+
+    static TService* getGlobalService(char const *serviceName = nullptr);
+    static void setGlobalService(char const *serviceName, TService* service);
+
+    virtual ~ServiceProvider() = default;
 private:
-    static TService* mService;
+    static ServiceProvider<TService>* sServiceProvider;
 };
+template<typename TService>
+ServiceProvider<TService>* ServiceProvider<TService>::sServiceProvider = nullptr;
 
+template<typename TService>
+void ServiceProvider<TService>::setServiceProvider(ServiceProvider<TService> *serviceProvider) {
+    sServiceProvider = serviceProvider;
+}
 
-template <typename TService>
-TService* ServiceProvider<TService>::mService = nullptr;
+template<typename TService>
+ServiceProvider<TService> *ServiceProvider<TService>::getServiceProvider() {
+    return sServiceProvider;
+}
 
-template <typename TService>
-TService* ServiceProvider<TService>::getService(size_t id) {
-    if(mService != nullptr){
-        return mService;
+template<typename TService>
+TService *ServiceProvider<TService>::getGlobalService(const char *serviceName) {
+    if(sServiceProvider != nullptr){
+        return sServiceProvider->getService(serviceName);
     }else{
-        Serial.println("Unable to get service. Stopping forever!");
-        while (true){
-            delay(1000);
-        }
+        // TODO("write to error loging");
+        return nullptr;
     }
 }
 
-template <typename TService>
-TService* ServiceProvider<TService>::getServiceMaybe(size_t id) {
-    return mService;
-}
-
 template<typename TService>
-void ServiceProvider<TService>::setService(TService *service) {
-    mService = service;
-}
-
-template<typename TService>
-bool ServiceProvider<TService>::isServiceAvailable() {
-    return mService != nullptr;
+void ServiceProvider<TService>::setGlobalService(const char *serviceName, TService *service) {
+    if(sServiceProvider != nullptr){
+        return sServiceProvider->setService(serviceName, service);
+    }else{
+        // TODO("write to error loging");
+    }
 }
 
 

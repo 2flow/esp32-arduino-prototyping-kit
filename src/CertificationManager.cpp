@@ -162,5 +162,7 @@ bool CertificationManager::loadWithEEPROM(char const * const host) {
             saveToEEPROM();
         }
     }
+
+    return sAvailable;
 }
 

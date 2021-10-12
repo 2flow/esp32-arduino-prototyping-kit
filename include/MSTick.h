@@ -5,14 +5,21 @@
 #ifndef ESP32PROROTYPINGLIB_MSTICK_H
 #define ESP32PROROTYPINGLIB_MSTICK_H
 
+#include "esp32-hal-timer.h"
+
 class IEventReceiver{
 public:
 
 };
 
-template <size_t RECEIVER_COUNT>
 class MSTick {
 public:
+    static void init(size_t coreTickInMhz = 80);
+    static void loop();
+
+private:
+    static bool sIsInited;
+    static hw_timer_t* sHWTimer;
 };
 
 
