@@ -8,7 +8,7 @@ set(CMAKE_CXX_STANDARD 11)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
 set(SOURCE_LIST ../src/Log.cpp
-        ../test/StdLog.cpp)
+        ../test/StdLog.cpp ../src/ArduinoButton.cpp)
 
 add_executable(TestMain "testMain.cpp" ${SOURCE_LIST})
 target_include_directories(TestMain PUBLIC "../include")

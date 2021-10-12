@@ -8,8 +8,10 @@ ActualChannel<10> msChannel;
 ActualServiceProvider<10,AbstractChannel<int, char*>> notifyProvider2;
 
 #include "ServiceProvider.h"
+#include "WebSocketServer.h"
+#include "FileServer.h"
 
-
+FileServer server;
 
 
 

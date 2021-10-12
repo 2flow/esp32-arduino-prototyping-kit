@@ -21,6 +21,7 @@ public:
 
     static TService* getGlobalService(char const *serviceName = nullptr);
     static void setGlobalService(char const *serviceName, TService* service);
+    static void setGlobalService(TService *service);
 
     virtual ~ServiceProvider() = default;
 private:
@@ -53,6 +54,15 @@ template<typename TService>
 void ServiceProvider<TService>::setGlobalService(const char *serviceName, TService *service) {
     if(sServiceProvider != nullptr){
         return sServiceProvider->setService(serviceName, service);
+    }else{
+        // TODO("write to error loging");
+    }
+}
+
+template<typename TService>
+void ServiceProvider<TService>::setGlobalService(TService *service) {
+    if(sServiceProvider != nullptr){
+        return sServiceProvider->setService(service);
     }else{
         // TODO("write to error loging");
     }

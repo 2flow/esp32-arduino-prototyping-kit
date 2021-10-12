@@ -24,5 +24,6 @@ void SPIFFSService::init() {
 }
 
 void SPIFFSService::useAsFSService() {
-    ServiceProvider<FS>::setGlobalService("default", &SPIFFS);
+    ServiceProvider<FS>::setGlobalService(&SPIFFS);
+
 }
