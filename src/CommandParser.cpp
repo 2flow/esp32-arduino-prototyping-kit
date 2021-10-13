@@ -17,11 +17,13 @@ int CommandParser::getNextInt() {
 
     if((pEnd == mCurrent) || (pEnd > mpEnd)){
         mIsError = true;
+        char const * msg = nullptr;
         if(pEnd == mCurrent)
-            Log::error("Error during parsing: not found");
+            msg = ("Error during parsing: not found");
         else
-            Log::error("Error during parsing: overflow");
+            msg = ("Error during parsing: overflow");
 
+        throw Exception(msg);
         return 0;
     }
 
@@ -39,6 +41,7 @@ bool CommandParser::skipSeparator() {
         mCurrent ++;
     }else{
         mIsError = true;
+        throw Exception{"separator not found"};
     }
 
     return mIsError;

@@ -6,8 +6,16 @@
 #define ESP32PROROTYPINGLIB_COMMANDPARSER_H
 
 
+#include <exception>
+
 class CommandParser {
 public:
+    class Exception : public std::exception{
+    public:
+        Exception(char const * msg = nullptr): message{msg} {};
+        char const * message;
+    };
+
     struct ParserParameter {
         char const * const & mpBuffer;
         char const* & mpEnd;
