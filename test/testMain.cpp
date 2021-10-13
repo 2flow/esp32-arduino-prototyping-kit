@@ -36,6 +36,7 @@ StdLog stdLog;
 int main(){
     stdLog.setAsGlobal();
     Log::error("testmessage \r\n");
+
     msChannel.addSink(&channelx);
     msChannel.addSink(&ch);
     ServiceProvider<AbstractChannel<>>::setGlobalService("msTick", &msChannel);

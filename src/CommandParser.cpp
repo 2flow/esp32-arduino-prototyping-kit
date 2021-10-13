@@ -6,8 +6,7 @@
 #include "CommandParser.h"
 #include "Log.h"
 
-CommandParser::CommandParser(char *buffer, int length) {
-    mpBuffer=buffer;
+CommandParser::CommandParser(char const * buffer, int length) : mpBuffer(buffer) {
     mpEnd = buffer + length;
     mCurrent = buffer;
 }
@@ -44,3 +43,30 @@ bool CommandParser::skipSeparator() {
 
     return mIsError;
 }
+
+bool CommandParser::moveCursor(int by) {
+    auto newPos = mCurrent + by;
+    if((newPos > mpEnd) || (newPos < mpBuffer)){
+        return false;
+    }else{
+        mCurrent = newPos;
+        return true;
+    }
+}
+
+void CommandParser::setEscapeChar(char escChar) {
+    mEscapeChar = escChar;
+}
+
+char CommandParser::getEscapeChar() const {
+    return mEscapeChar;
+}
+
+void CommandParser::setSeparator(char separator) {
+    mSeparatorChar = separator;
+}
+
+char CommandParser::getSeparator() const {
+    return mSeparatorChar;
+}
+
