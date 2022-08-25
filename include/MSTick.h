@@ -14,12 +14,13 @@ public:
 
 class MSTick {
 public:
-    static void init(size_t coreTickInMhz = 80);
-    static void loop();
+    static void init(bool publishToService = false, size_t coreTickInMhz = 80);
+    static bool loop();
 
 private:
     static bool sIsInited;
     static hw_timer_t* sHWTimer;
+    static bool sPublishToService;
 };
 
 
